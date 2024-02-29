@@ -1,3 +1,7 @@
+const button = document.querySelector('.button');
+const buttonText = button.innerHTML;
+let playerChoice;
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * (max+1));
   }
@@ -22,30 +26,28 @@ function getComputerChoice(){
 
 function playRound(playerSelection, computerChoice){
     //tie
-    if(playerSelection == computerChoice){
-        console.log('Tie, you both chose the same thing!')
+    if(playerSelection === computerChoice){
+        alert('Tie, you both chose the same thing!')
     }
     //player loses
     else if((playerSelection === 'rock' && computerChoice === 'paper') || (playerSelection === 'paper' && computerChoice === 'scissors') || (playerSelection === 'scissors' && computerChoice === 'rock')){
-        console.log('You loose, ' +computerChoice+ ' beats ' +playerSelection+ '.');
+        alert('You loose, ' +computerChoice+ ' beats ' +playerSelection+ '.');
     }
     //player wins
     else if((playerSelection == 'rock' && computerChoice == 'scissors') || (playerSelection === 'paper' && computerChoice === 'rock') || (playerSelection === 'scissors' && computerChoice === 'paper')){
-        console.log('You win!');
+        alert('You win!');
     }
 }
 
-function playGame(){
-    
+function playGame(playerSelection, computerChoice){
+    for(let i = 0; i >=5; i++){
+        playRound(playerSelection, computerChoice);
+    };
 }
 
 const computerChoice = getComputerChoice();
 
-const playerSelection = prompt('Choose between Rock, Paper and Scissors');
-playerSelection.toLowerCase();
-
-playRound(playerSelection,computerChoice);
-
-
-
-
+button.addEventListener('click', function(){
+    playerChoice = buttonText.toLocaleLowerCase();
+    playRound(playerChoice,computerChoice);
+});
